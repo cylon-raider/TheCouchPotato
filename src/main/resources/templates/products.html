@@ -54,7 +54,7 @@
             </thead>
             <tbody>
             <tr th:if="${products.empty}">
-                <td style="text-align: center" colspan="4"> No Orders Available </td>
+                <td style="text-align: center" colspan="4"> No Products Available </td>
             </tr>
             <tr th:each="productModel : ${products}">
                 <td style="text-align: center"><h5 th:text="${productModel.productId}">0000000001</h5></td>
