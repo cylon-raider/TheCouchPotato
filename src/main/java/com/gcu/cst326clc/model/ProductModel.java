@@ -15,7 +15,7 @@ public class ProductModel {
     private String productName;
 
     @NotNull(message="Product description is required")
-    @Size(min=1, max=10, message="Product description must be between 1 and 32 characters")
+    @Size(min=1, max=255, message="Product description must be between 1 and 255 characters")
     @ApiModelProperty(value = "Product Description", example = "Lorem Ipsum")
     private String productDescription;
 

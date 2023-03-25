@@ -31,28 +31,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception
     {
         http.csrf().disable()
-                .httpBasic()
-                .and()
                 .authorizeRequests()
-                .antMatchers("/service/**").authenticated()
-                .and()
+                	.antMatchers("/service/**").authenticated()
+                	.and()
                 .authorizeRequests()
-                .antMatchers("/", "/registration/**", "/images/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                	.antMatchers("/", "/registration/**", "/images/**").permitAll()
+                	.anyRequest().authenticated()
+                	.and()
                 .formLogin()
-                .loginPage("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .permitAll()
-                .defaultSuccessUrl("/index", true)
-                .and()
+                	.loginPage("/login")
+	                .usernameParameter("username")
+	                .passwordParameter("password")
+	                .permitAll()
+	                .defaultSuccessUrl("/index", true)
+	                .and()
+                .httpBasic()
+                	.and()
                 .logout()
-                .logoutUrl("/logout")
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .permitAll()
-                .logoutSuccessUrl("/");
+	                .logoutUrl("/logout")
+	                .invalidateHttpSession(true)
+	                .clearAuthentication(true)
+	                .permitAll()
+	                .logoutSuccessUrl("/");
     }
 
     @Autowired
@@ -60,9 +60,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     {
         auth.userDetailsService(service).passwordEncoder(passwordEncoder);
     }
-
-
-
-
-
 }

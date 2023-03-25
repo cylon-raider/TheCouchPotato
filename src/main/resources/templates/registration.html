@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:form="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="layouts/defaultTemplate">
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="layouts/loginRegistrationTemplate">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
       integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -17,6 +17,9 @@
 
 <head>
     <style>
+  	.header{
+		  padding-top: 20px;
+	  }
         .footer {
             position: fixed;
             left: 0;
@@ -39,6 +42,9 @@
 <body>
 
 <div layout:fragment="content">
+	<div class="header">
+		<h2>Registration</h2>
+	</div>
     <form class="inputForm" th:action="@{register}" th:object="${userModel}" method="post">
         <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control form-control-lg"
                th:field="*{firstName}"/>
@@ -59,7 +65,7 @@
                th:field="*{password}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></h5>
         <button class="btn btn-primary" type="submit">Register</button>
-        <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login/" class="fw-bold text-body"><u>Login here</u></a></p>
+        <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/" class="fw-bold text-body"><u>Login here</u></a></p>
     </form>
 </div>
 

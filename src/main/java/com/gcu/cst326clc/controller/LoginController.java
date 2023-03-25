@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-
 public class LoginController {
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public ModelAndView display(){
         ModelAndView modelAndView = new ModelAndView();
         LoginModel loginModel = new LoginModel();

@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 @Controller
@@ -99,4 +101,15 @@ public class ProductController {
             return modelAndView;
         }
     }
+
+    @GetMapping("/search")
+    public ModelAndView showSearchForm(@Valid String q, Model model) {
+    	ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("search");
+        List<ProductModel> products = productBusinessService.findByNameContainingIgnoreCase(q);
+        model.addAttribute("title", "Product Search");
+        model.addAttribute("products", products);
+    	return modelAndView;
+    }
+
 }
