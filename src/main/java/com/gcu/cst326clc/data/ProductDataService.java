@@ -102,16 +102,31 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 
 	public List<ProductModel> findByNameContainingIgnoreCase(String query)
 	{		
-		String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME OR PRODUCT_DESCRIPTION LIKE ?";
+		String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE ?";
+		String sql2 = "SELECT * FROM PRODUCT WHERE PRODUCT_DESCRIPTION LIKE ?";
+		Object[] args = { "%" + query + "%" };
 		 List<ProductModel> products = new ArrayList<>();
 	        try {
-	            SqlRowSet srs = jdbcTemplate.queryForRowSet(sql, "%" + query + "%");
+	            SqlRowSet srs = jdbcTemplate.queryForRowSet(sql, args);
 	            while (srs.next()) {
 	                products.add(new ProductModel(srs.getInt("PRODUCT_ID"),
 	                        srs.getString("PRODUCT_NAME"),
 	                        srs.getString("PRODUCT_DESCRIPTION"),
 	                        srs.getFloat("PRODUCT_PRICE"),
 	                        srs.getInt("PRODUCT_QUANTITY")));
+	                
+	                try {
+	    	            SqlRowSet srs2 = jdbcTemplate.queryForRowSet(sql2, args);
+	    	            while (srs2.next()) {
+	    	                products.add(new ProductModel(srs2.getInt("PRODUCT_ID"),
+	    	                		srs2.getString("PRODUCT_NAME"),
+	    	                		srs2.getString("PRODUCT_DESCRIPTION"),
+	    	                		srs2.getFloat("PRODUCT_PRICE"),
+	    	                		srs2.getInt("PRODUCT_QUANTITY")));
+	    	            }
+	    	        } catch (Exception e) {
+	    	            e.printStackTrace();
+	    	        }
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
