@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/loginRegistrationTemplate">
 <head>
   <style>
+  	.header{
+		  padding-top: 20px;
+	  }
     .footer{
       position: fixed;
       left: 0;
@@ -23,12 +26,16 @@
 <body>
 <div th:if="${param.error}">Invalid Username or Password</div>
 <div layout:fragment="content">
-  <form class="inputForm" th:action="@{/login}" method="post">
-    <input type="text" id="username" name="username" placeholder="Username" class="form-control form-control-lg"/>
-    <input type="password" id="password" name="password" placeholder="Password" class="form-control form-control-lg"/>
-    <button class="btn btn-primary" type="submit">Login</button>
-    <a class="btn btn-primary" href="/registration/" role="button">Register</a>
-  </form>
+	<div class="header">
+		<h1>CST-326 CLC Project: E-Commerce App</h1>
+		<h2>Login</h2>
+	</div>
+  	<form class="inputForm" th:action="@{/login}" method="post">
+    	<input type="text" id="username" name="username" placeholder="Username" class="form-control form-control-lg"/>
+    	<input type="password" id="password" name="password" placeholder="Password" class="form-control form-control-lg"/>
+    	<button class="btn btn-primary" type="submit">Login</button>
+   		<a class="btn btn-primary" href="/registration/" role="button">Register</a>
+  	</form>
 </div>
 <div layout:fragment="footer" class="footer"></div>
 </body>

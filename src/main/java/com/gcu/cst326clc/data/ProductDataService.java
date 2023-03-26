@@ -12,7 +12,8 @@ import java.util.List;
 @Service
 public class ProductDataService implements DataAccessInterface<ProductModel> {
 
-    @Autowired
+    @SuppressWarnings("unused")
+	@Autowired
     private DataSource dataSource;
 
     @Autowired
@@ -98,4 +99,24 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
         }
         return true;
     }
+
+	public List<ProductModel> findByNameContainingIgnoreCase(String query)
+	{		
+		String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE ? OR PRODUCT_DESCRIPTION LIKE ?";
+		List<ProductModel> products = new ArrayList<>();
+	        try {
+	        
+	            SqlRowSet srs = jdbcTemplate.queryForRowSet(sql, "%" + query + "%", "%" + query + "%");
+	            while (srs.next()) {
+	                products.add(new ProductModel(srs.getInt("PRODUCT_ID"),
+	                        srs.getString("PRODUCT_NAME"),
+	                        srs.getString("PRODUCT_DESCRIPTION"),
+	                        srs.getFloat("PRODUCT_PRICE"),
+	                        srs.getInt("PRODUCT_QUANTITY")));
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return products;
+	}
 }

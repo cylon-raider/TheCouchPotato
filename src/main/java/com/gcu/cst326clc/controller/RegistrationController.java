@@ -39,7 +39,7 @@ public class RegistrationController {
             return "registration";
         }
         if (userBusinessService.createUser(userModel)){
-            return "regSuccess";
+            return "login";
         }else {
             return "registration";
         }
