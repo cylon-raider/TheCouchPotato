@@ -66,7 +66,7 @@ public class ProductRestService
     public ProductList getProductAsXml()
     {
         ProductList productList = new ProductList();
-        productList.setProduct(service.getAll());
+        productList.setProductList(service.getAll());
         return productList;
     }
 

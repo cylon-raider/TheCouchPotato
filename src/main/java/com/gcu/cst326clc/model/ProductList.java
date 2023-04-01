@@ -8,16 +8,16 @@ import java.util.List;
 @XmlRootElement(name="products")
 public class ProductList
 {
-    private List<ProductModel> products = new ArrayList<ProductModel>();
+    private List<ProductModel> productList = new ArrayList<ProductModel>();
 
     @XmlElement(name="product")
-    public List<ProductModel> getProduct()
+    public List<ProductModel> getProductList()
     {
-        return products;
+        return productList;
     }
 
-    public void setProduct(List<ProductModel> products)
+    public void setProductList(List<ProductModel> products)
     {
-        this.products = products;
+        this.productList = products;
     }
 }

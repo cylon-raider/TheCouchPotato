@@ -28,24 +28,30 @@ public class ProductModel {
     @Range(min=1, max=1000, message="Product quantity must be between 1 and 10 characters")
     @ApiModelProperty(value = "Quantity of product available", example = "10")
     private Integer productQuantity;
+    
+    @NotNull(message="Add a category to help users find products faster")
+    @Size(min=1, max=32, message=("Product Category must be between 1 and 32 characters"))
+    @ApiModelProperty(value="Category for product search", example="Apparel")
+    private String productCategory;
 
-    public ProductModel(String productName, String productDescription, Float productPrice, Integer productQuantity) {
+    public ProductModel(String productName, String productDescription, Float productPrice, Integer productQuantity, String productCategory) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
+        this.productCategory = productCategory;
     }
 
-    public ProductModel(Integer productId, String productName, String productDescription, Float productPrice, Integer productQuantity) {
+    public ProductModel(Integer productId, String productName, String productDescription, Float productPrice, Integer productQuantity, String productCategory) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
+        this.productCategory = productCategory;
     }
 
-    public ProductModel() {
-    }
+    public ProductModel() { }
 
     public String getProductName() {
         return productName;
@@ -86,4 +92,14 @@ public class ProductModel {
     public void setProductId(Integer productId) {
         this.productId = productId;
     }
+
+	public String getProductCategory()
+	{
+		return productCategory;
+	}
+
+	public void setProductCategory(String category)
+	{
+		this.productCategory = category;
+	}
 }

@@ -1,5 +1,6 @@
 package com.gcu.cst326clc.controller;
 
+import com.gcu.cst326clc.business.CategoryBusinessService;
 import com.gcu.cst326clc.business.ProductBusinessService;
 import com.gcu.cst326clc.model.ProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class ProductController {
 
     @Autowired
     private ProductBusinessService productBusinessService;
+    
+    @Autowired
+    private CategoryBusinessService categoryBusinessService;
 
     @GetMapping("/")
     public ModelAndView display(){
@@ -35,6 +39,7 @@ public class ProductController {
         ProductModel productModel = new ProductModel();
         modelAndView.addObject("title", "Add Product Page");
         modelAndView.addObject("productModel", productModel);
+        modelAndView.addObject("categories", categoryBusinessService.getAllCategories());
         modelAndView.setViewName("addProduct");
         return modelAndView;
     }
@@ -60,9 +65,10 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public ModelAndView addProduct(@Valid ProductModel productModel, BindingResult bindingResult, Model model){
+    public ModelAndView addProduct(@Valid ProductModel productModel, String productCategory, BindingResult bindingResult, Model model){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addProduct");
+        productModel.setProductCategory(productCategory);
         if(bindingResult.hasErrors()){
             model.addAttribute("title", "Add Product Page");
             return modelAndView;

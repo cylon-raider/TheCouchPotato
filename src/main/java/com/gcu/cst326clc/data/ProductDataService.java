@@ -35,7 +35,8 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
                         srs.getString("PRODUCT_NAME"),
                         srs.getString("PRODUCT_DESCRIPTION"),
                         srs.getFloat("PRODUCT_PRICE"),
-                        srs.getInt("PRODUCT_QUANTITY")));
+                        srs.getInt("PRODUCT_QUANTITY"),
+                		srs.getString("PRODUCT_CATEGORY")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,10 +65,10 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 
     @Override
     public boolean create(ProductModel productModel) {
-        String sql = "INSERT INTO PRODUCT(PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_QUANTITY) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO PRODUCT(PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_QUANTITY, PRODUCT_CATEGORY) VALUES(?,?,?,?,?)";
         try {
             jdbcTemplate.update(sql, productModel.getProductName(), productModel.getProductDescription(),
-                    productModel.getProductPrice(), productModel.getProductQuantity());
+                    productModel.getProductPrice(), productModel.getProductQuantity(), productModel.getProductCategory());
         }catch (Exception e){
             e.printStackTrace();
             return false;
@@ -77,10 +78,10 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 
     @Override
     public boolean update(ProductModel productModel) {
-        String sql = "UPDATE PRODUCT SET PRODUCT_NAME = ?, PRODUCT_DESCRIPTION = ?, PRODUCT_PRICE = ?, PRODUCT_QUANTITY = ? WHERE PRODUCT_ID = ?";
+        String sql = "UPDATE PRODUCT SET PRODUCT_NAME = ?, PRODUCT_DESCRIPTION = ?, PRODUCT_PRICE = ?, PRODUCT_QUANTITY = ?, PRODUCT_CATEGORY = ? WHERE PRODUCT_ID = ?";
         try {
             jdbcTemplate.update(sql, productModel.getProductName(), productModel.getProductDescription(),
-                    productModel.getProductPrice(), productModel.getProductQuantity(), productModel.getProductId());
+                    productModel.getProductPrice(), productModel.getProductQuantity(), productModel.getProductCategory(), productModel.getProductId());
         }catch (Exception e){
             e.printStackTrace();
             return false;
@@ -102,17 +103,18 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 
 	public List<ProductModel> findByNameContainingIgnoreCase(String query)
 	{		
-		String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE ? OR PRODUCT_DESCRIPTION LIKE ?";
+		String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE ? OR PRODUCT_DESCRIPTION LIKE ? OR PRODUCT_CATEGORY LIKE ?";
 		List<ProductModel> products = new ArrayList<>();
 	        try {
 	        
-	            SqlRowSet srs = jdbcTemplate.queryForRowSet(sql, "%" + query + "%", "%" + query + "%");
+	            SqlRowSet srs = jdbcTemplate.queryForRowSet(sql, "%" + query + "%", "%" + query + "%", "%" + query + "%");
 	            while (srs.next()) {
 	                products.add(new ProductModel(srs.getInt("PRODUCT_ID"),
 	                        srs.getString("PRODUCT_NAME"),
 	                        srs.getString("PRODUCT_DESCRIPTION"),
 	                        srs.getFloat("PRODUCT_PRICE"),
-	                        srs.getInt("PRODUCT_QUANTITY")));
+	                        srs.getInt("PRODUCT_QUANTITY"),
+	                		srs.getString("PRODUCT_CATEGORY")));
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
