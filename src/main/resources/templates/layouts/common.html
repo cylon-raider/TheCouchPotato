@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns="http://www.w3.org/1999/html">
+     
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+      
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
@@ -9,6 +13,8 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+
 
 <head>
     <style>
@@ -24,7 +30,7 @@
 
         /* navigation bar styles */
         .navbar {
-            background: #fff linear-gradient(to right, #ff6b6b, #ffa07a);
+			background: linear-gradient(45deg, #ff6b6b, #ffa07a);
             border-radius: 0;
             border: none;
             box-shadow: none;
@@ -68,7 +74,7 @@
 </head>
 <body>
 <div th:fragment="header">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(45deg, #ff6b6b, #ffa07a);">
         <div class="container-fluid">
             <a class="navbar-brand" href="/index/">Home</a>
             <a class="navbar-brand" href="/products/">Products</a>
