@@ -50,6 +50,7 @@ public class ProductController {
         ProductModel productModel = new ProductModel();
         modelAndView.addObject("title", "Edit Product Page");
         modelAndView.addObject("productModel", productModel);
+        modelAndView.addObject("categories", categoryBusinessService.getAllCategories());
         modelAndView.setViewName("updateProduct");
         return modelAndView;
     }
@@ -81,9 +82,10 @@ public class ProductController {
     }
 
     @PostMapping("/updateProduct")
-    public ModelAndView updateProduct(@Valid ProductModel productModel, BindingResult bindingResult, Model model){
+    public ModelAndView updateProduct(@Valid ProductModel productModel, String productCategory, BindingResult bindingResult, Model model){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateProduct");
+        productModel.setProductCategory(productCategory);
         if(bindingResult.hasErrors()){
             model.addAttribute("title", "Add Product Page");
             return modelAndView;

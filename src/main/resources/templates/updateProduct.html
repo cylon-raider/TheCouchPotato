@@ -55,11 +55,11 @@
                th:field="*{productQuantity}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></h5>
         
-        <select name="category" id="category" >
+        <select name="productCategory" id="productCategory" >
 		  <option value="">Select a category</option>
-		  <option th:each="category : ${categories}" th:value="${category.categoryName}" th:text="${category.categoryName}" />
-		</select>
-        <h5 style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></h5>
+		  <option th:each="productCategory : ${categories}" th:value="${productCategory.categoryName}" th:text="${productCategory.categoryName}" />
+		  </select>
+        <h5 style="color: red" th:if="${#fields.hasErrors('productCategory')}" th:errors="*{productCategory}"></h5>
         
         <button class="btn btn-primary" type="submit">Update Product</button>
     </form>
