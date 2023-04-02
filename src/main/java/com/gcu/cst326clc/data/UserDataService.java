@@ -7,13 +7,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class UserDataService implements DataAccessInterface<UserModel> {
 
+	@SuppressWarnings("unused")
     @Autowired
     private DataSource dataSource;
 

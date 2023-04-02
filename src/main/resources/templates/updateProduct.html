@@ -54,6 +54,13 @@
         <input type="number" id="productQuantity" name="productQuantity" placeholder="Quantity" class="form-control form-control-lg"
                th:field="*{productQuantity}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></h5>
+        
+        <select name="productCategory" id="productCategory" >
+		  <option value="">Select a category</option>
+		  <option th:each="productCategory : ${categories}" th:value="${productCategory.categoryName}" th:text="${productCategory.categoryName}" />
+		  </select>
+        <h5 style="color: red" th:if="${#fields.hasErrors('productCategory')}" th:errors="*{productCategory}"></h5>
+        
         <button class="btn btn-primary" type="submit">Update Product</button>
     </form>
 </div>
