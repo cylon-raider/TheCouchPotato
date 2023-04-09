@@ -2,7 +2,9 @@ package com.gcu.cst326clc.controller;
 
 import com.gcu.cst326clc.business.CategoryBusinessService;
 import com.gcu.cst326clc.business.ProductBusinessService;
+import com.gcu.cst326clc.business.UserBusinessService;
 import com.gcu.cst326clc.model.ProductModel;
+import com.gcu.cst326clc.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,6 +21,9 @@ import javax.validation.Valid;
 @RequestMapping("/products")
 public class ProductController {
 
+	@Autowired
+	private UserBusinessService userBusinessService;
+	
     @Autowired
     private ProductBusinessService productBusinessService;
     
@@ -25,10 +31,13 @@ public class ProductController {
     private CategoryBusinessService categoryBusinessService;
 
     @GetMapping("/")
-    public ModelAndView display(){
+    public ModelAndView display(Principal user){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("title", "Product Page");
         modelAndView.addObject("products", productBusinessService.getAll());
+        UserModel activeUser = userBusinessService.getUserAuthority(user.getName());
+        boolean isAdmin = activeUser.isActive() && activeUser.getRoleId() == 1;
+        modelAndView.addObject("isAdmin", isAdmin);
         modelAndView.setViewName("products");
         return modelAndView;
     }
@@ -66,7 +75,7 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public ModelAndView addProduct(@Valid ProductModel productModel, String productCategory, BindingResult bindingResult, Model model){
+    public ModelAndView addProduct(@Valid ProductModel productModel, String productCategory, BindingResult bindingResult, Model model, Principal user){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addProduct");
         productModel.setProductCategory(productCategory);
@@ -75,14 +84,14 @@ public class ProductController {
             return modelAndView;
         }
         if(productBusinessService.addProduct(productModel)){
-            return this.display();
+            return this.display(user);
         }else {
             return modelAndView;
         }
     }
 
     @PostMapping("/updateProduct")
-    public ModelAndView updateProduct(@Valid ProductModel productModel, String productCategory, BindingResult bindingResult, Model model){
+    public ModelAndView updateProduct(@Valid ProductModel productModel, String productCategory, BindingResult bindingResult, Model model, Principal user){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateProduct");
         productModel.setProductCategory(productCategory);
@@ -91,30 +100,33 @@ public class ProductController {
             return modelAndView;
         }
         if(productBusinessService.updateProduct(productModel)){
-            return this.display();
+            return this.display(user);
         }else {
             return modelAndView;
         }
     }
 
     @PostMapping("/deleteProduct")
-    public ModelAndView deleteProduct(ProductModel productModel) {
+    public ModelAndView deleteProduct(ProductModel productModel, Principal user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("deleteProduct");
 
         if(productBusinessService.deleteProduct(productModel))
         {
-            return this.display();
+            return this.display(user);
         } else {
             return modelAndView;
         }
     }
 
     @GetMapping("/search")
-    public ModelAndView showSearchForm(@Valid String q, Model model) {
+    public ModelAndView showSearchForm(@Valid String q, Model model, Principal user) {
     	ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search");
         List<ProductModel> products = productBusinessService.findByNameContainingIgnoreCase(q);
+        UserModel activeUser = userBusinessService.getUserAuthority(user.getName());
+        boolean isAdmin = activeUser.isActive() && activeUser.getRoleId() == 1;
+        modelAndView.addObject("isAdmin", isAdmin);
         model.addAttribute("title", "Product Search");
         model.addAttribute("products", products);
     	return modelAndView;
