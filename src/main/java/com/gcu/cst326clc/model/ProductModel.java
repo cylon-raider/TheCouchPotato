@@ -20,7 +20,7 @@ public class ProductModel {
     private String productDescription;
 
     @NotNull(message="Product price is a required field")
-    @Range(min=1, max=1000, message="Product price must be between 1 and 10 characters")
+    @Range(min=1, max=1000000, message="Product price must be between 1 and 10 characters")
     @ApiModelProperty(value = "Product Price", example = "1.00")
     private Float productPrice;
 

@@ -2,6 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:form="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="layouts/defaultTemplate">
+     
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
       integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -41,17 +45,17 @@
 
 <div layout:fragment="content">
     <form class="inputForm" th:action="@{addProduct}" th:object="${productModel}" method="post">
-        <input type="text" id="productName" name="productName" placeholder="Product Name" class="form-control form-control-lg"
-               th:field="*{productName}"/>
+        <label for="productName"></label><input type="text" id="productName" name="productName" placeholder="Product Name" class="form-control form-control-lg"
+                                                th:field="*{productName}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></h5>
-        <input type="text" id="productDescription" name="productDescription" placeholder="Product Description" class="form-control form-control-lg"
-               th:field="*{productDescription}"/>
+        <label for="productDescription"></label><input type="text" id="productDescription" name="productDescription" placeholder="Product Description" class="form-control form-control-lg"
+                                                       th:field="*{productDescription}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productDescription')}" th:errors="*{productDescription}"></h5>
-        <input type="number" step=".01" min="0" id="productPrice" name="productPrice" placeholder="Price" class="form-control form-control-lg"
-               th:field="*{productPrice}"/>
+        <label for="productPrice"></label><input type="number" step=".01" min="0" id="productPrice" name="productPrice" placeholder="Price" class="form-control form-control-lg"
+                                                 th:field="*{productPrice}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productPrice')}" th:errors="*{productPrice}"></h5>
-        <input type="number" id="productQuantity" name="productQuantity" placeholder="Quantity" class="form-control form-control-lg"
-               th:field="*{productQuantity}"/>
+        <label for="productQuantity"></label><input type="number" id="productQuantity" name="productQuantity" placeholder="Quantity" class="form-control form-control-lg"
+                                                    th:field="*{productQuantity}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></h5>
         
         <select name="productCategory" id="productCategory" >
