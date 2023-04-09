@@ -42,4 +42,8 @@ public class UserBusinessService implements UserDetailsService {
             throw new UsernameNotFoundException("Username not found");
         }
     }
+    
+    public UserModel getUserAuthority(String username) {
+    	return userDataService.getUserAuthority(username);
+    }
 }
