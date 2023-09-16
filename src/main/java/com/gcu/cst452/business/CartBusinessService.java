@@ -1,15 +1,15 @@
-package com.gcu.cst326clc.business;
+package com.gcu.cst452.business;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gcu.cst326clc.data.CartDataService;
-import com.gcu.cst326clc.data.ProductDataService;
-import com.gcu.cst326clc.data.UserDataService;
-import com.gcu.cst326clc.model.CartItem;
-import com.gcu.cst326clc.model.CartModel;
-import com.gcu.cst326clc.model.ProductModel;
+import com.gcu.cst452.data.CartDataService;
+import com.gcu.cst452.data.ProductDataService;
+import com.gcu.cst452.data.UserDataService;
+import com.gcu.cst452.model.CartItem;
+import com.gcu.cst452.model.CartModel;
+import com.gcu.cst452.model.ProductModel;
 
 @Service
 public class CartBusinessService

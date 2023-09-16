@@ -1,4 +1,4 @@
-package com.gcu.cst326clc.model;
+package com.gcu.cst452.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

@@ -1,10 +1,10 @@
-package com.gcu.cst326clc.business;
+package com.gcu.cst452.business;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gcu.cst326clc.data.CategoryDataService;
-import com.gcu.cst326clc.model.CategoryModel;
+import com.gcu.cst452.data.CategoryDataService;
+import com.gcu.cst452.model.CategoryModel;
 
 @Service
 public class CategoryBusinessService

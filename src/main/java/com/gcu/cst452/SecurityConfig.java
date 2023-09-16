@@ -1,6 +1,6 @@
-package com.gcu.cst326clc;
+package com.gcu.cst452;
 
-import com.gcu.cst326clc.business.UserBusinessService;
+import com.gcu.cst452.business.UserBusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

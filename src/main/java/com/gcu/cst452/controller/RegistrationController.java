@@ -1,7 +1,7 @@
-package com.gcu.cst326clc.controller;
+package com.gcu.cst452.controller;
 
-import com.gcu.cst326clc.business.UserBusinessService;
-import com.gcu.cst326clc.model.UserModel;
+import com.gcu.cst452.business.UserBusinessService;
+import com.gcu.cst452.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,6 +1,6 @@
-package com.gcu.cst326clc.controller;
+package com.gcu.cst452.controller;
 
-import com.gcu.cst326clc.model.LoginModel;
+import com.gcu.cst452.model.LoginModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;

@@ -1,4 +1,4 @@
-package com.gcu.cst326clc.controller;
+package com.gcu.cst452.controller;
 
 import java.security.Principal;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.gcu.cst326clc.business.CartBusinessService;
-import com.gcu.cst326clc.business.UserBusinessService;
-import com.gcu.cst326clc.model.CartItem;
-import com.gcu.cst326clc.model.UserModel;
+import com.gcu.cst452.business.CartBusinessService;
+import com.gcu.cst452.business.UserBusinessService;
+import com.gcu.cst452.model.CartItem;
+import com.gcu.cst452.model.UserModel;
 
 @Controller
 @RequestMapping("/cart")

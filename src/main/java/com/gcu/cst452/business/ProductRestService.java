@@ -1,7 +1,7 @@
-package com.gcu.cst326clc.business;
+package com.gcu.cst452.business;
 
-import com.gcu.cst326clc.model.ProductList;
-import com.gcu.cst326clc.model.ProductModel;
+import com.gcu.cst452.model.ProductList;
+import com.gcu.cst452.model.ProductModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

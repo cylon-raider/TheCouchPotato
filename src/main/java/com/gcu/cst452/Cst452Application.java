@@ -1,4 +1,4 @@
-package com.gcu.cst326clc;
+package com.gcu.cst452;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-public class Cst326ClcApplication {
+public class Cst452Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Cst326ClcApplication.class, args);
+        SpringApplication.run(Cst452Application.class, args);
     }
 
 }

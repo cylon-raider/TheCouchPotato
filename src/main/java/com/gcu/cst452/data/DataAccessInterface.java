@@ -1,4 +1,4 @@
-package com.gcu.cst326clc.data;
+package com.gcu.cst452.data;
 
 import java.util.List;
 

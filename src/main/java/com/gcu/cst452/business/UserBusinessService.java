@@ -1,8 +1,8 @@
-package com.gcu.cst326clc.business;
+package com.gcu.cst452.business;
 
-import com.gcu.cst326clc.data.UserDataService;
-import com.gcu.cst326clc.model.LoginModel;
-import com.gcu.cst326clc.model.UserModel;
+import com.gcu.cst452.data.UserDataService;
+import com.gcu.cst452.model.LoginModel;
+import com.gcu.cst452.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

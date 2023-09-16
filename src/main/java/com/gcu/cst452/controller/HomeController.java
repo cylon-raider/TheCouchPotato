@@ -1,4 +1,4 @@
-package com.gcu.cst326clc.controller;
+package com.gcu.cst452.controller;
 
 import java.security.Principal;
 import java.util.List;
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.gcu.cst326clc.business.ProductBusinessService;
-import com.gcu.cst326clc.business.UserBusinessService;
-import com.gcu.cst326clc.model.ProductModel;
-import com.gcu.cst326clc.model.UserModel;
+import com.gcu.cst452.business.ProductBusinessService;
+import com.gcu.cst452.business.UserBusinessService;
+import com.gcu.cst452.model.ProductModel;
+import com.gcu.cst452.model.UserModel;
 
 @Controller
 @RequestMapping("/")

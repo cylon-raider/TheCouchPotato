@@ -1,4 +1,4 @@
-package com.gcu.cst326clc.data;
+package com.gcu.cst452.data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
-import com.gcu.cst326clc.model.CartModel;
+import com.gcu.cst452.model.CartModel;
 
 @Service
 public class CartDataService implements DataAccessInterface<CartModel>

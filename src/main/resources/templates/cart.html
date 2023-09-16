@@ -53,10 +53,10 @@
 					        <td class="text-center"><h5 th:text="${CartItem.description}">1.0</h5></td>
 					        <td class="text-center"><h5 th:text="${CartItem.price}">1</h5></td>
 					        <td class="text-center">
-					        	<a th:href="@{/cart/deleteItem?productId={id}(id=${CartItem.id})}" class="btn">Delete</a>
-					        	<a th:href="@{/cart/decrementItem?productId={id}&itemQty={qty}(id=${CartItem.id}, qty=${CartItem.qty})}" class="btn">-</a>
-					        	<h5 th:text="${CartItem.qty}" style="display: inline-block;">1</h5>	
-					        	<a th:href="@{/cart/incrementItem?productId={id}&itemQty={qty}(id=${CartItem.id}, qty=${CartItem.qty})}" class="btn">+</a>
+                                <a th:with="productId=${CartItem.id}" th:href="@{/cart/deleteItem(productId=${productId})}" class="btn">Delete</a>
+                                <a th:with="productId=${CartItem.id}, itemQty=${CartItem.qty}" th:href="@{/cart/decrementItem(productId=${productId},itemQty=${itemQty})}" class="btn">-</a>
+					        	<h5 th:text="${CartItem.qty}" style="display: inline-block;">1</h5>
+                                <a th:with="productId=${CartItem.id}, itemQty=${CartItem.qty}" th:href="@{/cart/incrementItem(productId=${productId},itemQty=${itemQty})}" class="btn">+</a>
 					        </td>        
 					        <td class="text-center"><h5 th:text="${CartItem.total}">1</h5></td>
 					    </tr>

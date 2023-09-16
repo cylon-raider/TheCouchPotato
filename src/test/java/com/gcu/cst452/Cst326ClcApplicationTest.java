@@ -1,6 +1,4 @@
-package com.gcu.cst326clc;
-
-import static org.junit.jupiter.api.Assertions.*;
+package com.gcu.cst452;
 
 class Cst326ClcApplicationTest {
 

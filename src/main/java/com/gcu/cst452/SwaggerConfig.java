@@ -1,4 +1,4 @@
-package com.gcu.cst326clc;
+package com.gcu.cst452;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

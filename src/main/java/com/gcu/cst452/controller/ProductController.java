@@ -1,10 +1,10 @@
-package com.gcu.cst326clc.controller;
+package com.gcu.cst452.controller;
 
-import com.gcu.cst326clc.business.CategoryBusinessService;
-import com.gcu.cst326clc.business.ProductBusinessService;
-import com.gcu.cst326clc.business.UserBusinessService;
-import com.gcu.cst326clc.model.ProductModel;
-import com.gcu.cst326clc.model.UserModel;
+import com.gcu.cst452.business.CategoryBusinessService;
+import com.gcu.cst452.business.ProductBusinessService;
+import com.gcu.cst452.business.UserBusinessService;
+import com.gcu.cst452.model.ProductModel;
+import com.gcu.cst452.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,46 +30,53 @@ public class ProductController {
     @Autowired
     private CategoryBusinessService categoryBusinessService;
 
+    // Helper method to determine if the user is an admin
+    private boolean isAdmin(Principal user) {
+        UserModel activeUser = userBusinessService.getUserAuthority(user.getName());
+        return activeUser.isActive() && activeUser.getRoleId() == 1;
+    }
+
     @GetMapping("/")
     public ModelAndView display(Principal user){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("title", "Product Page");
         modelAndView.addObject("products", productBusinessService.getAll());
-        UserModel activeUser = userBusinessService.getUserAuthority(user.getName());
-        boolean isAdmin = activeUser.isActive() && activeUser.getRoleId() == 1;
-        modelAndView.addObject("isAdmin", isAdmin);
+        modelAndView.addObject("isAdmin", isAdmin(user));  // Set isAdmin using the helper method
         modelAndView.setViewName("products");
         return modelAndView;
     }
 
     @GetMapping("/add")
-    public ModelAndView displayAddProducts(){
+    public ModelAndView displayAddProducts(Principal user){
         ModelAndView modelAndView = new ModelAndView();
         ProductModel productModel = new ProductModel();
         modelAndView.addObject("title", "Add Product Page");
         modelAndView.addObject("productModel", productModel);
         modelAndView.addObject("categories", categoryBusinessService.getAllCategories());
+        modelAndView.addObject("isAdmin", isAdmin(user));  // Set isAdmin using the helper method
         modelAndView.setViewName("addProduct");
         return modelAndView;
     }
 
     @GetMapping("/update")
-    public ModelAndView displayEditProducts(){
+    public ModelAndView displayEditProducts(Principal user){
         ModelAndView modelAndView = new ModelAndView();
         ProductModel productModel = new ProductModel();
         modelAndView.addObject("title", "Edit Product Page");
         modelAndView.addObject("productModel", productModel);
         modelAndView.addObject("categories", categoryBusinessService.getAllCategories());
+        modelAndView.addObject("isAdmin", isAdmin(user));  // Set isAdmin using the helper method
         modelAndView.setViewName("updateProduct");
         return modelAndView;
     }
 
     @GetMapping("/delete")
-    public ModelAndView displayDeleteProducts(){
+    public ModelAndView displayDeleteProducts(Principal user){
         ModelAndView modelAndView = new ModelAndView();
         ProductModel productModel = new ProductModel();
         modelAndView.addObject("title", "Delete Product Page");
         modelAndView.addObject("productModel", productModel);
+        modelAndView.addObject("isAdmin", isAdmin(user));  // Set isAdmin using the helper method
         modelAndView.setViewName("deleteProduct");
         return modelAndView;
     }
@@ -121,15 +128,13 @@ public class ProductController {
 
     @GetMapping("/search")
     public ModelAndView showSearchForm(@Valid String q, Model model, Principal user) {
-    	ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search");
         List<ProductModel> products = productBusinessService.findByNameContainingIgnoreCase(q);
-        UserModel activeUser = userBusinessService.getUserAuthority(user.getName());
-        boolean isAdmin = activeUser.isActive() && activeUser.getRoleId() == 1;
-        modelAndView.addObject("isAdmin", isAdmin);
+        modelAndView.addObject("isAdmin", isAdmin(user));  // Set isAdmin using the helper method
         model.addAttribute("title", "Product Search");
         model.addAttribute("products", products);
-    	return modelAndView;
+        return modelAndView;
     }
 
 }

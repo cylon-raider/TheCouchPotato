@@ -8,11 +8,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gcu.clc</groupId>
-	<artifactId>CST-326CLC</artifactId>
+	<artifactId>CST-452</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>CST-326CLC</name>
-	<description>CST-326CLC</description>
+	<name>CST-452</name>
+	<description>CST-452</description>
 	<properties>
 		<java.version>15</java.version>
 		<spring-cloud.version>Hoxton.SR11</spring-cloud.version>
@@ -101,7 +101,7 @@
 		<dependencies></dependencies>
 	</dependencyManagement>
 	<build>
-		<finalName>cst326clc</finalName>
+		<finalName>cst452</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

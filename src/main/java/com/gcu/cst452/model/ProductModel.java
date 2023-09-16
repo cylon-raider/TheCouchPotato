@@ -1,4 +1,4 @@
-package com.gcu.cst326clc.model;
+package com.gcu.cst452.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotNull;

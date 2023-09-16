@@ -1,7 +1,7 @@
-package com.gcu.cst326clc.business;
+package com.gcu.cst452.business;
 
-import com.gcu.cst326clc.data.ProductDataService;
-import com.gcu.cst326clc.model.ProductModel;
+import com.gcu.cst452.data.ProductDataService;
+import com.gcu.cst452.model.ProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

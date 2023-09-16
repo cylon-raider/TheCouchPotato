@@ -1,6 +1,6 @@
-package com.gcu.cst326clc.data;
+package com.gcu.cst452.data;
 
-import com.gcu.cst326clc.model.ProductModel;
+import com.gcu.cst452.model.ProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
