@@ -32,6 +32,15 @@ public class CartController
 		modelAndView.addObject("title", "Cart Page");
 		List<CartItem> items = cartBusinessService.getCartItemsByUsername(user.getName());
 		modelAndView.addObject("items", items);
+
+		// Calculate and add cart totals to the model
+		double subTotal = cartBusinessService.calculateSubTotal(items);
+		double tax = cartBusinessService.calculateTax(subTotal);
+		double total = cartBusinessService.calculateTotal(subTotal, tax);
+		modelAndView.addObject("cartSubTotal", subTotal);
+		modelAndView.addObject("cartTax", tax);
+		modelAndView.addObject("cartTotal", total);
+
 		UserModel activeUser = userBusinessService.getUserAuthority(user.getName());
 		boolean isAdmin = activeUser.isActive() && activeUser.getRoleId() == 1;
 		modelAndView.addObject("isAdmin", isAdmin);

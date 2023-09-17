@@ -23,6 +23,21 @@ public class CartBusinessService
 	@Autowired
 	private UserDataService userDataService;
 
+	//Cart checkout-sub total, tax, and total
+	private static final double TAX_RATE = 0.10;
+
+	public double calculateSubTotal(List<CartItem> items) {
+		return items.stream().mapToDouble(item -> item.getPrice() * item.getQty()).sum();
+	}
+
+	public double calculateTax(double subTotal) {
+		return subTotal * TAX_RATE;
+	}
+
+	public double calculateTotal(double subTotal, double tax) {
+		return subTotal + tax;
+	}
+
 	public List<CartItem> getCartItemsByUsername(String username)
 	{
 		List<CartItem> items = new ArrayList<CartItem>();

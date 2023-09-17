@@ -16,7 +16,7 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            background-color: #9CB2BC;
+            background-color: #5764e1;
             color: black;
             text-align: center;
         }
@@ -64,6 +64,34 @@
                 </table>
                 
                 <!-- add cart sub-total, tax, shipping, and grand total here -->
+                <!-- Cart Summary -->
+                <div class="mt-4">
+                    <h4>Summary:</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Sub-Total:
+                            <span th:text="${#numbers.formatDecimal(cartSubTotal, 1, 2)}">$0.00</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Tax (10%):
+                            <span th:text="${#numbers.formatDecimal(cartTax, 1, 2)}">$0.00</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Total:
+                            <span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)}">$0.00</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Checkout Button with Popup -->
+                <div class="mt-4 text-center">
+                    <button class="btn btn-primary" onclick="showCheckoutPopup()">Checkout</button>
+                </div>
+
+                <script>
+                    function showCheckoutPopup() {
+                        alert("Checkout/Shipping under construction");
+                    }
+                </script>
                 
             </div>
         </div>
