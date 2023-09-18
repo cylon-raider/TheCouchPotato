@@ -25,6 +25,9 @@
 </head>
 <body>
 <div th:if="${param.error}">Invalid Username or Password</div>
+<div th:if="${errorMessage}" class="error-message">
+	<p th:text="${errorMessage}"></p>
+</div>
 <div layout:fragment="content">
 	<div class="header">
 		<h1>The Couch Potato Shopping App</h1>
