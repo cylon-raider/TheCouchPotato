@@ -33,7 +33,7 @@ public class UserBusinessService implements UserDetailsService {
     {
         LoginModel user = userDataService.findByUsername(username);
 
-        if(user != null)
+        if(user != null && user.getUsername() != null && !user.getUsername().isEmpty() && user.getPassword() != null && !user.getPassword().isEmpty())
         {
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("USER"));

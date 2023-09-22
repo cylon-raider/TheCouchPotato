@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class LoginModel {
 
-    private int Id;
+    private int id;
 
     @NotNull(message="User name is a required field")
     @Size(min=1, max=32, message="User name must be between 1 and 32 characters")
@@ -14,13 +14,23 @@ public class LoginModel {
     @NotNull(message="Password is a required field")
     @Size(min=1, max=32, message="Password must be between 1 and 32 characters")
     private String password;
+    private boolean isActive;
+    private int roleId;
 
-    public int getId() {
-        return Id;
+    public LoginModel(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public LoginModel(int id, String username, String password, boolean isActive, int roleId) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.isActive = isActive;
+        this.roleId = roleId;
+    }
+
+    public LoginModel(){
     }
 
     public String getUsername() {
@@ -38,4 +48,31 @@ public class LoginModel {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+
+
 }

@@ -21,21 +21,23 @@
 
   </style>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Login Page</title>
 </head>
 <body>
-<div th:if="${param.error}">Invalid Username or Password</div>
-<div th:if="${errorMessage}" class="error-message">
-	<p th:text="${errorMessage}"></p>
-</div>
 <div layout:fragment="content">
 	<div class="header">
 		<h1>The Couch Potato Shopping App</h1>
 		<h2>Login</h2>
 	</div>
-  	<form class="inputForm" th:action="@{/login}" method="post">
-    	<input type="text" id="username" name="username" placeholder="Username" class="form-control form-control-lg"/>
-    	<input type="password" id="password" name="password" placeholder="Password" class="form-control form-control-lg"/>
+
+	<h5 style="color: red" th:if="${errorMessage}" th:text="${errorMessage}"></h5>
+	<form class="inputForm" th:action="@{doLogin}" th:object="${loginModel}" method="post">
+    	<input type="text" id="username" name="username" placeholder="Username" class="form-control form-control-lg"
+			   th:field="*{username}"/>
+		<h5 style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></h5>
+    	<input type="password" id="password" name="password" placeholder="Password" class="form-control form-control-lg"
+			   th:field="*{password}"/>
+		<h5 style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></h5>
     	<button class="btn btn-primary" type="submit">Login</button>
    		<a class="btn btn-primary" href="/registration/" role="button">Register</a>
   	</form>
