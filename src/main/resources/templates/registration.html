@@ -17,22 +17,55 @@
 
 <head>
     <style>
-  	.header{
-		  padding-top: 20px;
-	  }
+        .header{
+            padding-top: 20px;
+            text-align: center;
+        }
         .footer {
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
-            background-color: #5764e1;
-            color: black;
+            background-color: #333;
+            color: white;
             text-align: center;
+            padding: 5px 0;
         }
 
         .inputForm {
-            width: 300px;
-            margin: 0 auto;
+            max-width: 400px;
+            margin: 2em auto;
+            padding: 2em;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .inputForm input, .inputForm button {
+            width: 100%;
+            margin-bottom: 1em;
+            padding: 0.8em;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .inputForm button {
+            background-color: #5764e1;
+            color: white;
+            cursor: pointer;
+        }
+
+        .inputForm button:hover {
+            background-color: #2531b6;
+        }
+
+        .text-muted {
+            margin-top: 1em;
+        }
+
+        body {
+            background-color: #dad4e5;
+            background-image: url("data:image/svg+xml,%3Csvg width='32' height='64' viewBox='0 0 32 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 28h20V16h-4v8H4V4h28v28h-4V8H8v12h4v-8h12v20H0v-4zm12 8h20v4H16v24H0v-4h12V36zm16 12h-4v12h8v4H20V44h12v12h-4v-8zM0 36h8v20H0v-4h4V40H0v-4z' fill='%23cac4d4' fill-opacity='0.22' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
     </style>
     <meta charset="UTF-8">
@@ -41,31 +74,33 @@
 </head>
 <body>
 <div layout:fragment="content">
-	<div class="header">
-		<h2>Registration</h2>
-	</div>
-    <form class="inputForm" th:action="@{register}" th:object="${userModel}" method="post">
-        <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control form-control-lg"
-               th:field="*{firstName}"/>
-        <h5 style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></h5>
-        <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-control form-control-lg"
-               th:field="*{lastName}"/>
-        <h5 style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></h5>
-        <input type="text" id="email" name="email" placeholder="Email" class="form-control form-control-lg"
-               th:field="*{email}"/>
-        <h5 style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></h5>
-        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number"
-               class="form-control form-control-lg" th:field="*{phoneNumber}"/>
-        <h5 style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{phoneNumber}"></h5>
-        <input type="text" id="username" name="username" placeholder="Username" class="form-control form-control-lg"
-               th:field="*{username}"/>
-        <h5 style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></h5>
-        <input type="password" id="password" name="password" placeholder="Password" class="form-control form-control-lg"
-               th:field="*{password}"/>
-        <h5 style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></h5>
-        <button class="btn btn-primary" type="submit">Register</button>
-        <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/" class="fw-bold text-body"><u>Login here</u></a></p>
-    </form>
+    <div class="header">
+        <h2>Registration</h2>
+    </div>
+    <div class="inputForm">
+        <form th:action="@{register}" th:object="${userModel}" method="post">
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control form-control-lg"
+                   th:field="*{firstName}"/>
+            <h5 style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></h5>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-control form-control-lg"
+                   th:field="*{lastName}"/>
+            <h5 style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></h5>
+            <input type="text" id="email" name="email" placeholder="Email" class="form-control form-control-lg"
+                   th:field="*{email}"/>
+            <h5 style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></h5>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number"
+                   class="form-control form-control-lg" th:field="*{phoneNumber}"/>
+            <h5 style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{phoneNumber}"></h5>
+            <input type="text" id="username" name="username" placeholder="Username" class="form-control form-control-lg"
+                   th:field="*{username}"/>
+            <h5 style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></h5>
+            <input type="password" id="password" name="password" placeholder="Password" class="form-control form-control-lg"
+                   th:field="*{password}"/>
+            <h5 style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></h5>
+            <button class="btn btn-primary" type="submit">Register</button>
+            <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/" class="fw-bold text-body"><u>Login here</u></a></p>
+        </form>
+    </div>
 </div>
 
 

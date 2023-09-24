@@ -3,29 +3,33 @@
 <head>
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-	
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
-		integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-	
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-		crossorigin="anonymous"></script>
 
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 	<style>
+		body {
+			font-family: 'Poppins', sans-serif;
+		}
+
 		.footer {
 			position: fixed;
 			left: 0;
 			bottom: 0;
+			height: 50px;
 			width: 100%;
-			background-color: #5764e1;
-			color: black;
+			background-color: #333;
+			color: white;
 			text-align: center;
+			padding: 3px 0;
+			font-size: 0.8em;
 		}
 
 		/* navigation bar styles */
@@ -34,7 +38,7 @@
 			border-radius: 0;
 			border: none;
 			box-shadow: none;
-			font-family: 'Montserrat', sans-serif;
+			font-family: 'Poppins', sans-serif;
 		}
 
 		.navbar-brand {
@@ -66,36 +70,46 @@
 			color: #333;
 			box-shadow: none;
 		}
+
+		body {
+			padding-top: 30px;
+		}
 	</style>
 	<meta charset="UTF-8">
 	<title>Title</title>
 </head>
 
 <body>
-	<div th:fragment="header">
-		<nav class="navbar navbar-expand-lg" style="background: linear-gradient(45deg, #bdd4ef, #2f5bef);">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="/index/">Home</a>
+<div th:fragment="header">
+	<nav class="navbar navbar-expand-lg navbar-fixed-top" style="background: linear-gradient(45deg, #bdd4ef, #2f5bef);">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/index/">Home</a>
 
-				<a th:if="${isAdmin}" class="navbar-brand" href="/categories/">Manage Categories</a>
-				<a th:if="${isAdmin}" class="navbar-brand" href="/products/">Manage Products</a>
+			<a th:if="${isAdmin}" class="navbar-brand" href="#" onclick="alert('Manage Categories is currently under construction.');">Manage Categories</a>
 
-				<a th:if="${!isAdmin}" class="navbar-brand" href="/products/search/">Search</a>
-				<a th:if="${!isAdmin}" class="navbar-brand" href="/cart/">Cart</a>
+			<a th:if="${isAdmin}" class="navbar-brand" href="/products/">Manage Products</a>
 
-				<div>
-					<form style="float: right" th:action="@{/logout}" method="POST">
-						<button type="submit" class="btn navbar-btn">Logout</button>
-					</form>
-				</div>
+			<a th:if="${!isAdmin}" class="navbar-brand" href="/products/search/">Search</a>
+			<a th:if="${!isAdmin}" class="navbar-brand" href="/cart/">Cart</a>
+
+			<div>
+				<form style="float: right" th:action="@{/logout}" method="POST">
+					<button type="submit" class="btn navbar-btn">Logout</button>
+				</form>
 			</div>
+		</div>
 
+		<div class="footer" th:fragment="footer">
+			<h5 style="text-align: center">Copyright 2023 Grand Canyon University</h5>
+		</div>
+	</nav>
+</div>
+<script>
+	function showAlert() {
+		alert('Manage Categories is currently under construction.');
+	}
+</script>
 
-			<div class="footer" th:fragment="footer">
-				<h5 style="text-align: center">Copyright 2023 Grand Canyon University</h5>
-			</div>
-		</nav>
-	</div>
 </body>
 
 </html>
