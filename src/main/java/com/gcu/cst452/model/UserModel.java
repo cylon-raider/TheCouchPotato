@@ -62,6 +62,22 @@ public class UserModel {
     public UserModel() {
     }
 
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", isActive=" + isActive +
+                ", roleId=" + roleId +
+                '}';
+    }
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -134,3 +150,5 @@ public class UserModel {
         this.userId = userId;
     }
 }
+
+

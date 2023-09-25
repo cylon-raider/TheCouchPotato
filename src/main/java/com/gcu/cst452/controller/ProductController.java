@@ -82,12 +82,13 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public ModelAndView addProduct(@Valid ProductModel productModel, String productCategory, BindingResult bindingResult, Model model, Principal user){
+    public ModelAndView addProduct(@Valid ProductModel productModel, BindingResult bindingResult, String productCategory, Model model, Principal user){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addProduct");
         productModel.setProductCategory(productCategory);
         if(bindingResult.hasErrors()){
             model.addAttribute("title", "Add Product Page");
+            model.addAttribute("errorMessage", "Validation failed. Please check the entered values.");
             return modelAndView;
         }
         if(productBusinessService.addProduct(productModel)){
@@ -98,12 +99,13 @@ public class ProductController {
     }
 
     @PostMapping("/updateProduct")
-    public ModelAndView updateProduct(@Valid ProductModel productModel, String productCategory, BindingResult bindingResult, Model model, Principal user){
+    public ModelAndView updateProduct(@Valid ProductModel productModel, BindingResult bindingResult, String productCategory, Model model, Principal user){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateProduct");
         productModel.setProductCategory(productCategory);
         if(bindingResult.hasErrors()){
-            model.addAttribute("title", "Add Product Page");
+            model.addAttribute("title", "Update Product Page");
+            model.addAttribute("errorMessage", "Validation failed. Please check the entered values.");
             return modelAndView;
         }
         if(productBusinessService.updateProduct(productModel)){
@@ -127,7 +129,7 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public ModelAndView showSearchForm(@Valid String q, Model model, Principal user) {
+    public ModelAndView showSearchForm(String q, Model model, Principal user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search");
         List<ProductModel> products = productBusinessService.findByNameContainingIgnoreCase(q);

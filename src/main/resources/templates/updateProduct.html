@@ -29,7 +29,7 @@
 
         .inputForm {
             width: 300px;
-            margin: 0 auto;
+            margin-top: 50px;
         }
     </style>
     <meta charset="UTF-8">
@@ -39,24 +39,24 @@
 <body>
 
 <div layout:fragment="content">
-    <form class="inputForm" th:action="@{updateProduct}" th:object="${productModel}" method="post">
-        <input type="text" id="productId" name="productId" placeholder="Product Id" class="form-control form-control-lg"
-               th:field="*{productId}"/>
+    <form class="inputForm" th:action="@{/products/updateProduct}" th:object="${productModel}" method="post">
+        <label for="productId"></label><input type="text" id="productId" name="productId" placeholder="Product Id" class="form-control form-control-lg"
+                                              th:field="*{productId}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}"></h5>
-        <input type="text" id="productName" name="productName" placeholder="Product Name" class="form-control form-control-lg"
-               th:field="*{productName}"/>
+        <label for="productName"></label><input type="text" id="productName" name="productName" placeholder="Product Name" class="form-control form-control-lg"
+                                                th:field="*{productName}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></h5>
-        <input type="text" id="productDescription" name="productDescription" placeholder="Product Description" class="form-control form-control-lg"
-               th:field="*{productDescription}"/>
+        <label for="productDescription"></label><input type="text" id="productDescription" name="productDescription" placeholder="Product Description" class="form-control form-control-lg"
+                                                       th:field="*{productDescription}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productDescription')}" th:errors="*{productDescription}"></h5>
-        <input type="number" step=".01" min="0" id="productPrice" name="productPrice" placeholder="Price" class="form-control form-control-lg"
-               th:field="*{productPrice}"/>
+        <label for="productPrice"></label><input type="number" step=".01" min="0" id="productPrice" name="productPrice" placeholder="Price" class="form-control form-control-lg"
+                                                 th:field="*{productPrice}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productPrice')}" th:errors="*{productPrice}"></h5>
-        <input type="number" id="productQuantity" name="productQuantity" placeholder="Quantity" class="form-control form-control-lg"
-               th:field="*{productQuantity}"/>
+        <label for="productQuantity"></label><input type="number" id="productQuantity" name="productQuantity" placeholder="Quantity" class="form-control form-control-lg"
+                                                    th:field="*{productQuantity}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></h5>
-        
-        <select name="productCategory" id="productCategory" >
+
+        <label for="productCategory"></label><select name="productCategory" id="productCategory" >
 		  <option value="">Select a category</option>
 		  <option th:each="productCategory : ${categories}" th:value="${productCategory.categoryName}" th:text="${productCategory.categoryName}" />
 		  </select>

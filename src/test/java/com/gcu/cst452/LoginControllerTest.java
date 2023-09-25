@@ -1,5 +1,6 @@
-package com.gcu.cst452.controller;
+package com.gcu.cst452;
 
+import com.gcu.cst452.controller.LoginController;
 import com.gcu.cst452.model.LoginModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

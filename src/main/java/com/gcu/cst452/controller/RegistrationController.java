@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
 
 @Controller
@@ -30,19 +32,19 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
+    public String register(@Valid UserModel userModel, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         // Check validation errors
-        ModelAndView modelAndView = new ModelAndView();
-        if(bindingResult.hasErrors())
-        {
-            modelAndView.addObject("title", "Registration Form");
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("title", "Registration Form");
             return "registration";
         }
-        if (userBusinessService.createUser(userModel)){
-            return "login";
-        }else {
+        if (userBusinessService.createUser(userModel)) {
+            redirectAttributes.addFlashAttribute("successMessage", "Registration successful! Please login.");
+            return "redirect:/login";
+        } else {
+            model.addAttribute("errorMessage", "Registration failed. Please try again.");
             return "registration";
         }
-
     }
+
 }

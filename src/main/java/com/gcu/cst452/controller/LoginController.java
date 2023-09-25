@@ -23,6 +23,10 @@ public class LoginController {
 
     @GetMapping({"/", "/login"})
     public ModelAndView displayLogin(@RequestParam(value= "error", required= false) String error, Model model){
+        String successMessage = (String) model.asMap().get("successMessage");
+        if (successMessage != null) {
+            model.addAttribute("successMessage", successMessage);
+        }
         ModelAndView modelAndView = new ModelAndView();
         LoginModel loginModel = new LoginModel();
         modelAndView.addObject("title", "Login Form");

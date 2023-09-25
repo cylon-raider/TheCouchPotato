@@ -102,6 +102,9 @@
 </head>
 <body>
 <div layout:fragment="content">
+	<div th:if="${successMessage}" class="alert alert-success" role="alert">
+		<p th:text="${successMessage}"></p>
+	</div>
 	<div class="header">
 		<div class="potato potato-left" style="float: left;"></div>
 		<h1>The Couch Potato Shopping App</h1>

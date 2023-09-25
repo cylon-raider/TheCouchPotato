@@ -12,15 +12,11 @@ import java.util.List;
 @Service
 public class ProductDataService implements DataAccessInterface<ProductModel> {
 
-    @SuppressWarnings("unused")
-	@Autowired
-    private DataSource dataSource;
+
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
     public ProductDataService(DataSource dataSource) {
-        this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

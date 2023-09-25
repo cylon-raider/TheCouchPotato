@@ -59,7 +59,8 @@ public class UserDataService implements DataAccessInterface<UserModel>
 			SqlRowSet srs = jdbcTemplate.queryForRowSet(sql, id);
 			while (srs.next())
 			{
-				user.setUserId(id);
+				user.setUserId(srs.getInt("USER_ID"));
+				System.out.println(id);
 				user.setFirstName(srs.getString("FIRST_NAME"));
 				user.setLastName(srs.getString("LAST_NAME"));
 				user.setEmail(srs.getString("EMAIL"));
