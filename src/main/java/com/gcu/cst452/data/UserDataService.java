@@ -85,14 +85,21 @@ public class UserDataService implements DataAccessInterface<UserModel>
 		String sql = "INSERT INTO USER(FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, USERNAME, PASSWORD) VALUES (?,?,?,?,?,?)";
 		try
 		{
-			jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(),
+			int rowsAffected = jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(),
 					user.getUsername(), hashedPassword);
+			if (rowsAffected > 0) {
+				return true;
+			} else {
+				System.out.println("No rows affected, check the SQL query and parameters.");
+				return false;
+			}
 		} catch (Exception e)
 		{
 			e.printStackTrace();
+			System.out.println("Exception occurred: " + e.getMessage());
 			return false;
 		}
-		return true;
+
 	}
 
 	@Override
