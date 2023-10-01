@@ -39,7 +39,7 @@ public class CategoryDataService implements DataAccessInterface<CategoryModel>
     }
 
     /**
-     * Retrieves all categories from the database.
+     * Retrieves all categories.html from the database.
      *
      * @return A list of CategoryModel objects.
      */
@@ -124,7 +124,7 @@ public class CategoryDataService implements DataAccessInterface<CategoryModel>
     @Override
     public boolean delete(CategoryModel categoryModel)
     {
-        String sql = "DELETE FROM PRODUCT WHERE PRODUCT_ID = ?";
+        String sql = "DELETE FROM CATEGORY WHERE CATEGORY_ID = ?";
         try {
             jdbcTemplate.update(sql, categoryModel.getCategoryId());
         }catch (Exception e){

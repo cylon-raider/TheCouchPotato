@@ -10,15 +10,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class is used to test the LoginController class.
+ * It performs unit testing on the displayLogin method of LoginController.
+ */
 public class LoginControllerTest {
 
+    // Instance of LoginController to be tested
     private LoginController loginController;
 
+    /**
+     * This method is executed before each test.
+     * It initializes the loginController object.
+     */
     @BeforeEach
     void setUp() {
         loginController = new LoginController();
     }
 
+    /**
+     * This test method tests the displayLogin method of LoginController.
+     * It checks whether the correct view is returned and the model contains the correct attributes.
+     */
     @Test
     void displayLogin() {
         // Mock the behavior of the Model and error param
@@ -35,8 +48,8 @@ public class LoginControllerTest {
         assertTrue(modelAndView.getModel().containsKey("title"));
         assertTrue(modelAndView.getModel().containsKey("loginModel"));
 
+        // Assert the values of the model attributes
         assertEquals("Login Form", modelAndView.getModel().get("title"));
         assertTrue(modelAndView.getModel().get("loginModel") instanceof LoginModel);
     }
 }
-

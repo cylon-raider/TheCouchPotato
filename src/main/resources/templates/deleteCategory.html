@@ -1,4 +1,4 @@
-<!-- deleteProduct.html -->
+<!-- deleteCategory.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:form="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -41,7 +41,7 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>Delete Products</title>
+    <title>Delete Categories</title>
 </head>
 
 <!-- Body section contains the content of the webpage -->
@@ -49,12 +49,12 @@
 
 <!-- Content section -->
 <div layout:fragment="content">
-    <!-- Form for deleting a product -->
-    <form class="inputForm" th:action="@{/products/deleteProduct}" th:object="${productModel}" method="post">
-        <!-- Input for product ID -->
-        <label for="productId"></label><input type="number" id="productId" name="productId" placeholder="Product Id" class="form-control form-control-lg"/>
+    <!-- Form for deleting a category -->
+    <form class="inputForm" th:action="@{/categories/deleteCategory}" th:object="${categoryModel}" method="post">
+        <!-- Input for category ID -->
+        <label for="categoryId"></label><input type="number" id="categoryId" name="categoryId" placeholder="Category Id" class="form-control form-control-lg"/>
         <!-- Submit button -->
-        <button class="btn btn-primary" type="submit">Delete Product</button>
+        <button class="btn btn-primary" type="submit">Delete Category</button>
     </form>
 </div>
 
