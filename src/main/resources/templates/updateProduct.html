@@ -1,21 +1,21 @@
+<!-- updateProduct.html -->
 <!DOCTYPE html>
+<!-- The root element of an HTML page, with language set to English and additional namespaces for Thymeleaf. -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="layouts/defaultTemplate">
-<!-- Latest compiled and minified CSS -->
+<!-- Linking to external CSS and JS files for Bootstrap framework. -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
       integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-
-<!-- Optional theme -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
       integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
         crossorigin="anonymous"></script>
 
 <head>
+    <!-- Embedded CSS styles for various elements within the document. -->
     <style>
+        /* Styling for the footer section, including position, dimensions, and colors. */
         .footer {
             position: fixed;
             left: 0;
@@ -26,20 +26,24 @@
             text-align: center;
             padding: 5px 0;
         }
-
+        /* Styling for the input form, including width and margin properties. */
         .inputForm {
             width: 300px;
             margin-top: 50px;
         }
     </style>
+    <!-- Meta tag defining the character set for the document. -->
     <meta charset="UTF-8">
+    <!-- Title of the HTML document (appears in the browser's title bar or tab). -->
     <title>Update Products</title>
-
 </head>
+<!-- Main content of the HTML document. -->
 <body>
-
+<!-- Content division containing the form for updating products. -->
 <div layout:fragment="content">
+    <!-- Form for updating product details, with action pointing to the product update URL and method set to post. -->
     <form class="inputForm" th:action="@{/products/updateProduct}" th:object="${productModel}" method="post">
+        <!-- Various input fields for entering product details, with associated labels and error messages. -->
         <label for="productId"></label><input type="text" id="productId" name="productId" placeholder="Product Id" class="form-control form-control-lg"
                                               th:field="*{productId}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}"></h5>
@@ -55,18 +59,17 @@
         <label for="productQuantity"></label><input type="number" id="productQuantity" name="productQuantity" placeholder="Quantity" class="form-control form-control-lg"
                                                     th:field="*{productQuantity}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></h5>
-
+        <!-- Dropdown for selecting the product category. -->
         <label for="productCategory"></label><select name="productCategory" id="productCategory" >
-		  <option value="">Select a category</option>
-		  <option th:each="productCategory : ${categories}" th:value="${productCategory.categoryName}" th:text="${productCategory.categoryName}" />
-		  </select>
+        <option value="">Select a category</option>
+        <option th:each="productCategory : ${categories}" th:value="${productCategory.categoryName}" th:text="${productCategory.categoryName}" />
+    </select>
         <h5 style="color: red" th:if="${#fields.hasErrors('productCategory')}" th:errors="*{productCategory}"></h5>
-        
+        <!-- Submit button for the update product form. -->
         <button class="btn btn-primary" type="submit">Update Product</button>
     </form>
 </div>
-
-
+<!-- Footer division with a class of footer. -->
 <div layout:fragment="footer" class="footer"></div>
 </body>
 </html>

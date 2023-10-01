@@ -1,15 +1,21 @@
+<!-- cart.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
 
+<!-- Head section contains meta information and links to external stylesheets and scripts -->
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
+    <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
-        integrity="sha384-vtMzW/6KiqwclQ1uxEhUnTU7fWMoFdTJLqoogoXcX1xISxgjWlmbhXwO5kiS34v+" crossorigin="anonymous">
+          integrity="sha384-vtMzW/6KiqwclQ1uxEhUnTU7fWMoFdTJLqoogoXcX1xISxgjWlmbhXwO5kiS34v+" crossorigin="anonymous">
+    <!-- Link to DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap5.min.css">
+    <!-- Link to Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-        integrity="sha512-/vE1ZaR1xD/JFD5L5j5Zf60zRtR1jrtukwMu8kbF10+AWfXpLh3qTW3d61HzZ/bx+ZiNccT0nNwN05SzfCv7w=="
-        crossorigin="anonymous" />
+          integrity="sha512-/vE1ZaR1xD/JFD5L5j5Zf60zRtR1jrtukwMu8kbF10+AWfXpLh3qTW3d61HzZ/bx+ZiNccT0nNwN05SzfCv7w=="
+          crossorigin="anonymous" />
+    <!-- Internal style for body and footer -->
     <style>
         body {
             background-color: #f4f8ff;
@@ -34,75 +40,84 @@
 
 </head>
 
+<!-- Body section contains the content of the webpage -->
 <body>
 
-    <div class="cartTable container-fluid" layout:fragment="table">
-        <h2 class="text-center mb-4">Cart</h2>
-        <div class="row">
-            <div class="col-md-12">
-                <table id="cartTable" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Item Name</th>
-                            <th class="text-center">Item Description</th>
-                            <th class="text-center">Item Price</th>
-                            <th class="text-center">Item Quantity</th>
-                            <th class="text-center">Item Total</th>
-            			</tr>
-                    </thead>
-                    <tbody>
-					    <tr th:if="${items.isEmpty()}">
-					        <td class="text-center" colspan="5">Your Cart is Empty :(</td>
-					    </tr>
-					    <tr th:each="CartItem : ${items}">
-					        <td class="text-center"><h5 th:text="${CartItem.name}">Product 1</h5></td>
-					        <td class="text-center"><h5 th:text="${CartItem.description}">1.0</h5></td>
-					        <td class="text-center"><h5 th:text="${CartItem.price}">1</h5></td>
-					        <td class="text-center">
-                                <a th:with="productId=${CartItem.id}" th:href="@{/cart/deleteItem(productId=${productId})}" class="btn">Delete</a>
-                                <a th:with="productId=${CartItem.id}, itemQty=${CartItem.qty}" th:href="@{/cart/decrementItem(productId=${productId},itemQty=${itemQty})}" class="btn">-</a>
-					        	<h5 th:text="${CartItem.qty}" style="display: inline-block;">1</h5>
-                                <a th:with="productId=${CartItem.id}, itemQty=${CartItem.qty}" th:href="@{/cart/incrementItem(productId=${productId},itemQty=${itemQty})}" class="btn">+</a>
-					        </td>        
-					        <td class="text-center"><h5 th:text="${CartItem.total}">1</h5></td>
-					    </tr>
-	                </tbody>
-                </table>
-                
-                <!-- add cart sub-total, tax, shipping, and grand total here -->
-                <!-- Cart Summary -->
-                <div class="mt-4">
-                    <h4>Summary:</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Sub-Total:
-                            <span th:text="${#numbers.formatDecimal(cartSubTotal, 1, 2)}">$0.00</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tax (10%):
-                            <span th:text="${#numbers.formatDecimal(cartTax, 1, 2)}">$0.00</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Total:
-                            <span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)}">$0.00</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Checkout Button with Popup -->
-                <div class="mt-4 text-center">
-                    <button class="btn btn-primary" onclick="showCheckoutPopup()">Checkout</button>
-                </div>
+<!-- Cart table section -->
+<div class="cartTable container-fluid" layout:fragment="table">
+    <h2 class="text-center mb-4">Cart</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Cart items are displayed in this table -->
+            <table id="cartTable" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th class="text-center">Item Name</th>
+                    <th class="text-center">Item Description</th>
+                    <th class="text-center">Item Price</th>
+                    <th class="text-center">Item Quantity</th>
+                    <th class="text-center">Item Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Display message if cart is empty -->
+                <tr th:if="${items.isEmpty()}">
+                    <td class="text-center" colspan="5">Your Cart is Empty :(</td>
+                </tr>
+                <!-- Loop through each item in the cart and display its details -->
+                <tr th:each="CartItem : ${items}">
+                    <td class="text-center"><h5 th:text="${CartItem.name}">Product 1</h5></td>
+                    <td class="text-center"><h5 th:text="${CartItem.description}">1.0</h5></td>
+                    <td class="text-center"><h5 th:text="${CartItem.price}">1</h5></td>
+                    <td class="text-center">
+                        <!-- Buttons to delete, decrement, and increment item quantity -->
+                        <a th:with="productId=${CartItem.id}" th:href="@{/cart/deleteItem(productId=${productId})}" class="btn">Delete</a>
+                        <a th:with="productId=${CartItem.id}, itemQty=${CartItem.qty}" th:href="@{/cart/decrementItem(productId=${productId},itemQty=${itemQty})}" class="btn">-</a>
+                        <h5 th:text="${CartItem.qty}" style="display: inline-block;">1</h5>
+                        <a th:with="productId=${CartItem.id}, itemQty=${CartItem.qty}" th:href="@{/cart/incrementItem(productId=${productId},itemQty=${itemQty})}" class="btn">+</a>
+                    </td>
+                    <td class="text-center"><h5 th:text="${CartItem.total}">1</h5></td>
+                </tr>
+                </tbody>
+            </table>
 
-                <script>
-                    function showCheckoutPopup() {
-                        alert("Checkout/Shipping under construction");
-                    }
-                </script>
-                
+            <!-- Cart Summary Section -->
+            <div class="mt-4">
+                <h4>Summary:</h4>
+                <!-- List showing sub-total, tax, and total -->
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Sub-Total:
+                        <span th:text="${#numbers.formatDecimal(cartSubTotal, 1, 2)}">$0.00</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Tax (10%):
+                        <span th:text="${#numbers.formatDecimal(cartTax, 1, 2)}">$0.00</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total:
+                        <span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)}">$0.00</span>
+                    </li>
+                </ul>
             </div>
+            <!-- Checkout Button with Popup -->
+            <div class="mt-4 text-center">
+                <!-- Button to show checkout popup -->
+                <button class="btn btn-primary" onclick="showCheckoutPopup()">Checkout</button>
+            </div>
+
+            <!-- Script to show checkout popup -->
+            <script>
+                function showCheckoutPopup() {
+                    alert("Checkout/Shipping under construction");
+                }
+            </script>
+
         </div>
     </div>
-    <div class="footer" layout:fragment="footer"></div>
+</div>
+<!-- Footer section -->
+<div class="footer" layout:fragment="footer"></div>
 
 </body>
 </html>

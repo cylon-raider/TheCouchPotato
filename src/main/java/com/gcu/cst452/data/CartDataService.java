@@ -1,3 +1,10 @@
+/**
+ * Service class for handling cart data operations.
+ * Implements DataAccessInterface for CartModel.
+ *
+ * @author Chris Markel
+ * @version 1.0
+ */
 package com.gcu.cst452.data;
 
 import java.util.ArrayList;
@@ -12,24 +19,36 @@ import com.gcu.cst452.model.CartModel;
 @Service
 public class CartDataService implements DataAccessInterface<CartModel>
 {
+	// DataSource object for database connectivity
 	@SuppressWarnings("unused")
 	@Autowired
 	private DataSource dataSource;
 
+	// JdbcTemplate object for executing SQL queries
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * Constructor to initialize dataSource and jdbcTemplate.
+	 *
+	 * @param dataSource The dataSource object for database connectivity.
+	 */
 	public CartDataService(DataSource dataSource)
 	{
 		this.dataSource = dataSource;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	/**
+	 * Retrieves all cart data from the database.
+	 *
+	 * @return A list of CartModel objects.
+	 */
 	@Override
 	public List<CartModel> getAll()
 	{
 		String sql = "SELECT * FROM CART";
-		List<CartModel> cart = new ArrayList<CartModel>();
+		List<CartModel> cart = new ArrayList<>();
 		try
 		{
 			SqlRowSet srs = jdbcTemplate.queryForRowSet(sql);
@@ -44,23 +63,35 @@ public class CartDataService implements DataAccessInterface<CartModel>
 		return cart;
 	}
 
+	/**
+	 * Retrieves a specific cart by user ID from the database.
+	 *
+	 * @param id The user ID.
+	 * @return A CartModel object.
+	 */
 	@Override
 	public CartModel getById(int id)
 	{
 		String sql = "SELECT * FROM CART WHERE USER_ID = ?";
 		CartModel cart = new CartModel();
-        try {
-            SqlRowSet srs = jdbcTemplate.queryForRowSet(sql, id);
-            while (srs.next()){
-            	cart.setUserId(id);
-            	cart.setItems(srs.getString("CONTENTS"));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return cart;
+		try {
+			SqlRowSet srs = jdbcTemplate.queryForRowSet(sql, id);
+			while (srs.next()){
+				cart.setUserId(id);
+				cart.setItems(srs.getString("CONTENTS"));
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return cart;
 	}
 
+	/**
+	 * Creates a new cart in the database.
+	 *
+	 * @param cart The CartModel object.
+	 * @return A boolean indicating the success of the operation.
+	 */
 	@Override
 	public boolean create(CartModel cart)
 	{
@@ -77,6 +108,12 @@ public class CartDataService implements DataAccessInterface<CartModel>
 		return true;
 	}
 
+	/**
+	 * Updates a specific cart in the database.
+	 *
+	 * @param cart The CartModel object.
+	 * @return A boolean indicating the success of the operation.
+	 */
 	@Override
 	public boolean update(CartModel cart)
 	{
@@ -93,17 +130,22 @@ public class CartDataService implements DataAccessInterface<CartModel>
 		return true;
 	}
 
+	/**
+	 * Deletes a specific cart from the database.
+	 *
+	 * @param cart The CartModel object.
+	 * @return A boolean indicating the success of the operation.
+	 */
 	@Override
 	public boolean delete(CartModel cart)
 	{
 		String sql = "DELETE FROM CART WHERE USER_ID = ?";
-        try {
-            jdbcTemplate.update(sql, cart.getUserId());
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+		try {
+			jdbcTemplate.update(sql, cart.getUserId());
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
-
 }

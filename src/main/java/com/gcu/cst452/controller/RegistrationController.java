@@ -1,3 +1,11 @@
+/**
+ * Controller class for handling user registration requests.
+ * Provides endpoints for displaying the registration form and handling the registration submission.
+ * It uses the UserBusinessService to perform user registration.
+ *
+ * @author Chris Markel
+ * @version 1.0
+ */
 package com.gcu.cst452.controller;
 
 import com.gcu.cst452.business.UserBusinessService;
@@ -21,6 +29,11 @@ public class RegistrationController {
     @Autowired
     private UserBusinessService userBusinessService;
 
+    /**
+     * Displays the registration form.
+     *
+     * @return A ModelAndView object for the registration page.
+     */
     @GetMapping("/")
     public ModelAndView display() {
         ModelAndView modelAndView = new ModelAndView();
@@ -31,6 +44,16 @@ public class RegistrationController {
         return modelAndView;
     }
 
+    /**
+     * Handles the registration submission.
+     * Validates the user model, and if valid, attempts to create a new user.
+     *
+     * @param userModel The user model containing user details.
+     * @param bindingResult The binding result for validation.
+     * @param model The model to add attributes to.
+     * @param redirectAttributes The redirect attributes to add flash attributes to.
+     * @return A string indicating the view to redirect to.
+     */
     @PostMapping("/register")
     public String register(@Valid UserModel userModel, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         // Check validation errors
@@ -38,13 +61,15 @@ public class RegistrationController {
             model.addAttribute("title", "Registration Form");
             return "registration";
         }
+        // Attempt to create the user and handle the result
         if (userBusinessService.createUser(userModel)) {
+            // If successful, add a success message and redirect to the login page
             redirectAttributes.addFlashAttribute("successMessage", "Registration successful! Please login.");
             return "redirect:/login";
         } else {
+            // If failed, add an error message and return to the registration page
             model.addAttribute("errorMessage", "Registration failed. Please try again.");
             return "registration";
         }
     }
-
 }

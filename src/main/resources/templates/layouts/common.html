@@ -1,19 +1,25 @@
+<!-- common.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html">
+
+<!-- Head section contains meta information, links to external stylesheets, and scripts -->
 <head>
-	<!-- jQuery library -->
+	<!-- Including jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-	<!-- Latest compiled and minified CSS -->
+	<!-- Including Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
-	<!-- Optional theme -->
+	<!-- Including Optional Bootstrap theme -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
 
-	<!-- Latest compiled and minified JavaScript -->
+	<!-- Including Bootstrap JavaScript -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
+	<!-- Including Google Fonts -->
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+	<!-- Internal styles for body, footer, and navigation bar -->
 	<style>
 		body {
 			font-family: 'Poppins', sans-serif;
@@ -32,7 +38,7 @@
 			font-size: 0.8em;
 		}
 
-		/* navigation bar styles */
+		/* Styles for navigation bar */
 		.navbar {
 			background: linear-gradient(45deg, #bdd4ef, #2f5bef);
 			border-radius: 0;
@@ -79,19 +85,27 @@
 	<title>Title</title>
 </head>
 
+<!-- Body section contains the content of the webpage -->
 <body>
+<!-- Header section -->
 <div th:fragment="header">
+	<!-- Navigation bar with links -->
 	<nav class="navbar navbar-expand-lg navbar-fixed-top" style="background: linear-gradient(45deg, #bdd4ef, #2f5bef);">
 		<div class="container-fluid">
+			<!-- Home link -->
 			<a class="navbar-brand" href="/index/">Home</a>
 
+			<!-- Manage Categories link for admin -->
 			<a th:if="${isAdmin}" class="navbar-brand" href="#" onclick="alert('Manage Categories is currently under construction.');">Manage Categories</a>
 
+			<!-- Manage Products link for admin -->
 			<a th:if="${isAdmin}" class="navbar-brand" href="/products/">Manage Products</a>
 
+			<!-- Search and Cart links for non-admin -->
 			<a th:if="${!isAdmin}" class="navbar-brand" href="/products/search/">Search</a>
 			<a th:if="${!isAdmin}" class="navbar-brand" href="/cart/">Cart</a>
 
+			<!-- Logout button -->
 			<div>
 				<form style="float: right" th:action="@{/logout}" method="POST">
 					<button type="submit" class="btn navbar-btn">Logout</button>
@@ -99,11 +113,14 @@
 			</div>
 		</div>
 
+		<!-- Footer section -->
 		<div class="footer" th:fragment="footer">
 			<h5 style="text-align: center">Copyright 2023 Grand Canyon University</h5>
 		</div>
 	</nav>
 </div>
+
+<!-- Script to show alert -->
 <script>
 	function showAlert() {
 		alert('Manage Categories is currently under construction.');

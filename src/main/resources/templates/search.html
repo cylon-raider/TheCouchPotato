@@ -1,11 +1,16 @@
+<!-- search.html -->
 <!DOCTYPE html>
+<!-- The root element of an HTML page, with language set to English and additional namespaces for Thymeleaf. -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
 <head>
+    <!-- Embedded CSS styles for various elements within the document. -->
     <style>
+        /* Styling for the body element, including background properties. */
         body {
             background-color: #dae5ef;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='32' viewBox='0 0 16 32'%3E%3Cg fill='%23b7c5d1' fill-opacity='0.18'%3E%3Cpath fill-rule='evenodd' d='M0 24h4v2H0v-2zm0 4h6v2H0v-2zm0-8h2v2H0v-2zM0 0h4v2H0V0zm0 4h2v2H0V4zm16 20h-6v2h6v-2zm0 4H8v2h8v-2zm0-8h-4v2h4v-2zm0-20h-6v2h6V0zm0 4h-4v2h4V4zm-2 12h2v2h-2v-2zm0-8h2v2h-2V8zM2 8h10v2H2V8zm0 8h10v2H2v-2zm-2-4h14v2H0v-2zm4-8h6v2H4V4zm0 16h6v2H4v-2zM6 0h2v2H6V0zm0 24h2v2H6v-2z'/%3E%3C/g%3E%3C/svg%3E");
         }
+        /* Styling for the footer section, including position, dimensions, and colors. */
         .footer {
             position: fixed;
             left: 0;
@@ -17,20 +22,33 @@
             padding: 5px 0;
         }
     </style>
+    <!-- Meta tag defining the character set for the document. -->
     <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Title of the HTML document (appears in the browser's title bar or tab). -->
+    <title>Search Page</title>
 </head>
+<!-- Main content of the HTML document. -->
 <body>
+<!-- Content division containing various elements and sections. -->
 <div layout:fragment="content">
+    <!-- Heading for the Search Products section. -->
     <h2>Search Products</h2>
+    <!-- Form for searching products, with action pointing to the product search URL and method set to get. -->
     <form th:action="@{/products/search}" method="get">
-        <input type="text" name="q" placeholder="Search...">
+        <!-- Input field for entering the search query. -->
+        <label>
+            <input type="text" name="q" placeholder="Search...">
+        </label>
+        <!-- Submit button for the search form. -->
         <button type="submit">Search</button>
     </form>
 </div>
+<!-- Division for the product table. -->
 <div layout:fragment="table" class="productTable">
     <div>
+        <!-- Table for displaying product information. -->
         <table style="width:50%">
+            <!-- Table header with column titles. -->
             <thead>
             <tr>
                 <th style="text-align: center">Product ID</th>
@@ -41,24 +59,26 @@
                 <th style="text-align: center">Product Category</th>
             </tr>
             </thead>
+            <!-- Table body for displaying product data. -->
             <tbody>
+            <!-- Row for displaying a message when no matching products are found. -->
             <tr th:if="${products.empty}">
                 <td style="text-align: center" colspan="4"> No Matching Products </td>
             </tr>
+            <!-- Row for each product, displaying various details about the product. -->
             <tr th:each="productModel : ${products}">
                 <td style="text-align: center"><h5 th:text="${productModel.productId}">0000000001</h5></td>
                 <td style="text-align: center"><h5 th:text="${productModel.productName}">Product 1</h5></td>
                 <td style="text-align: center"><h5 th:text="${productModel.productDescription}">1.0</h5></td>
                 <td style="text-align: center"><h5 th:text="${productModel.productPrice}">1</h5></td>
                 <td style="text-align: center"><h5 th:text="${productModel.productQuantity}">1</h5></td>
-                <td style="text-align: center"><h5 th:text="${productModel.productCategory}">Category</h5></td>    
-
+                <td style="text-align: center"><h5 th:text="${productModel.productCategory}">Category</h5></td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
+<!-- Footer division with a class of footer. -->
 <div layout:fragment="footer" class="footer"></div>
 </body>
 </html>

@@ -1,11 +1,13 @@
+<!-- addProduct.html -->
+<!-- This template is used for adding products to the database -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:form="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="layouts/defaultTemplate">
-     
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
       integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -20,6 +22,7 @@
         crossorigin="anonymous"></script>
 
 <head>
+    <!-- Styling for footer and input form -->
     <style>
         .footer {
             position: fixed;
@@ -38,13 +41,16 @@
         }
 
     </style>
+    <!-- Meta tag to set the character set to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- Title of the HTML document -->
     <title>Add Products</title>
 
 </head>
 <body>
-
+<!-- Main content division -->
 <div layout:fragment="content">
+    <!-- Form for adding products, posts to /products/addProduct -->
     <form class="inputForm" th:action="@{/products/addProduct}" th:object="${productModel}" method="post">
         <label for="productName"></label><input type="text" id="productName" name="productName" placeholder="Product Name" class="form-control form-control-lg"
                                                 th:field="*{productName}"/>
@@ -59,15 +65,15 @@
                                                     th:field="*{productQuantity}"/>
         <h5 style="color: red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></h5>
         <label for="productCategory"></label><select name="productCategory" id="productCategory" >
-		  <option value="">Select a category</option>
-		  <option th:each="productCategory : ${categories}" th:value="${productCategory.categoryName}" th:text="${productCategory.categoryName}" />
-		</select>
+        <option value="">Select a category</option>
+        <option th:each="productCategory : ${categories}" th:value="${productCategory.categoryName}" th:text="${productCategory.categoryName}" />
+    </select>
         <h5 style="color: red" th:if="${#fields.hasErrors('productCategory')}" th:errors="*{productCategory}"></h5>
-        
+
         <button class="btn btn-primary" type="submit">Add Product</button>
     </form>
 </div>
-
+<!-- Footer division -->
 <div layout:fragment="footer" class="footer"></div>
 </body>
 </html>

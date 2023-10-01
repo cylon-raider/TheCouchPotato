@@ -1,3 +1,10 @@
+/**
+ * Controller class for handling cart-related requests.
+ * Provides endpoints for viewing the cart, adding, deleting, incrementing, and decrementing items in the cart.
+ *
+ * @author Chris Markel
+ * @version 1.0
+ */
 package com.gcu.cst452.controller;
 
 import java.security.Principal;
@@ -17,17 +24,22 @@ import com.gcu.cst452.model.UserModel;
 
 @Controller
 @RequestMapping("/cart")
-public class CartController
-{
+public class CartController {
+
+	// Autowired services for user and cart operations
 	@Autowired
 	private UserBusinessService userBusinessService;
-
 	@Autowired
 	private CartBusinessService cartBusinessService;
 
+	/**
+	 * Displays the cart page with all cart items and total calculations.
+	 *
+	 * @param user The current authenticated user.
+	 * @return A ModelAndView object for the cart page.
+	 */
 	@GetMapping("/")
-	public ModelAndView display(Principal user)
-	{
+	public ModelAndView display(Principal user) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("title", "Cart Page");
 		List<CartItem> items = cartBusinessService.getCartItemsByUsername(user.getName());
@@ -48,14 +60,18 @@ public class CartController
 		return modelAndView;
 	}
 
+	/**
+	 * Adds an item to the cart.
+	 *
+	 * @param productId The ID of the product to add.
+	 * @param user The current authenticated user.
+	 * @return A RedirectView object to redirect to the cart page.
+	 */
 	@GetMapping("/addItem")
-	public RedirectView addItemToCart(@RequestParam int productId, Principal user)
-	{
-		try
-		{
+	public RedirectView addItemToCart(@RequestParam int productId, Principal user) {
+		try {
 			cartBusinessService.addItem(user.getName(), productId);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		RedirectView redirectView = new RedirectView();
@@ -63,14 +79,18 @@ public class CartController
 		return redirectView;
 	}
 
+	/**
+	 * Deletes an item from the cart.
+	 *
+	 * @param productId The ID of the product to delete.
+	 * @param user The current authenticated user.
+	 * @return A RedirectView object to redirect to the cart page.
+	 */
 	@GetMapping("/deleteItem")
-	public RedirectView deleteItem(@RequestParam int productId, Principal user)
-	{
-		try
-		{
+	public RedirectView deleteItem(@RequestParam int productId, Principal user) {
+		try {
 			cartBusinessService.deleteItem(user.getName(), productId);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		RedirectView redirectView = new RedirectView();
@@ -78,21 +98,23 @@ public class CartController
 		return redirectView;
 	}
 
+	/**
+	 * Decrements the quantity of an item in the cart.
+	 *
+	 * @param productId The ID of the product to decrement.
+	 * @param itemQty The current quantity of the item.
+	 * @param user The current authenticated user.
+	 * @return A RedirectView object to redirect to the cart page.
+	 */
 	@GetMapping("/decrementItem")
-	public RedirectView decrementItem(@RequestParam int productId, @RequestParam int itemQty, Principal user)
-	{
-		try
-		{
-			if (itemQty - 1 == 0)
-			{
+	public RedirectView decrementItem(@RequestParam int productId, @RequestParam int itemQty, Principal user) {
+		try {
+			if (itemQty - 1 == 0) {
 				cartBusinessService.deleteItem(user.getName(), productId);
-			} else
-			{
+			} else {
 				cartBusinessService.updateItem(user.getName(), productId, itemQty - 1);
 			}
-
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		RedirectView redirectView = new RedirectView();
@@ -100,14 +122,19 @@ public class CartController
 		return redirectView;
 	}
 
+	/**
+	 * Increments the quantity of an item in the cart.
+	 *
+	 * @param productId The ID of the product to increment.
+	 * @param itemQty The current quantity of the item.
+	 * @param user The current authenticated user.
+	 * @return A RedirectView object to redirect to the cart page.
+	 */
 	@GetMapping("/incrementItem")
-	public RedirectView incrementItem(@RequestParam int productId, @RequestParam int itemQty, Principal user)
-	{
-		try
-		{
+	public RedirectView incrementItem(@RequestParam int productId, @RequestParam int itemQty, Principal user) {
+		try {
 			cartBusinessService.updateItem(user.getName(), productId, itemQty + 1);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		RedirectView redirectView = new RedirectView();

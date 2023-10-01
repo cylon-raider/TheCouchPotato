@@ -1,26 +1,28 @@
+<!-- registration.html -->
 <!DOCTYPE html>
+<!-- The root element of an HTML page, with language set to English and additional namespaces for Thymeleaf and other schemas. -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:form="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="layouts/loginRegistrationTemplate">
-<!-- Latest compiled and minified CSS -->
+<!-- Link to external stylesheets for Bootstrap. -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
       integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-
-<!-- Optional theme -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
       integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
+<!-- Link to external JavaScript for Bootstrap. -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
         crossorigin="anonymous"></script>
 
 <head>
+    <!-- Embedded CSS styles for various elements within the document. -->
     <style>
+        /* Styling for the header section, including padding and text alignment. */
         .header{
             padding-top: 20px;
             text-align: center;
         }
+        /* Styling for the footer section, including position, dimensions, and colors. */
         .footer {
             position: fixed;
             left: 0;
@@ -31,7 +33,7 @@
             text-align: center;
             padding: 5px 0;
         }
-
+        /* Styling for the inputForm class, including dimensions, colors, and shadows. */
         .inputForm {
             max-width: 400px;
             margin: 2em auto;
@@ -40,7 +42,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
+        /* Styling for input and button elements within the inputForm class. */
         .inputForm input, .inputForm button {
             width: 100%;
             margin-bottom: 1em;
@@ -48,40 +50,49 @@
             border-radius: 4px;
             border: 1px solid #ccc;
         }
-
+        /* Styling for button elements within the inputForm class, including colors and cursor style. */
         .inputForm button {
             background-color: #5764e1;
             color: white;
             cursor: pointer;
         }
-
+        /* Styling for button hover state within the inputForm class. */
         .inputForm button:hover {
             background-color: #2531b6;
         }
-
+        /* Styling for text-muted class, including top margin. */
         .text-muted {
             margin-top: 1em;
         }
-
+        /* Styling for the body element, including background properties. */
         body {
             background-color: #dad4e5;
             background-image: url("data:image/svg+xml,%3Csvg width='32' height='64' viewBox='0 0 32 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 28h20V16h-4v8H4V4h28v28h-4V8H8v12h4v-8h12v20H0v-4zm12 8h20v4H16v24H0v-4h12V36zm16 12h-4v12h8v4H20V44h12v12h-4v-8zM0 36h8v20H0v-4h4V40H0v-4z' fill='%23cac4d4' fill-opacity='0.22' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
     </style>
+    <!-- Meta tag defining the character set for the document. -->
     <meta charset="UTF-8">
+    <!-- Title of the HTML document (appears in the browser's title bar or tab). -->
     <title>Registration Page</title>
-
 </head>
+<!-- Main content of the HTML document. -->
 <body>
+<!-- Content division containing various elements and sections. -->
 <div layout:fragment="content">
+    <!-- Header division with a heading for Registration. -->
     <div class="header">
         <h2>Registration</h2>
     </div>
+    <!-- Division for the input form for registration. -->
     <div class="inputForm">
+        <!-- Form for registration, with action pointing to the registration URL and method set to post. -->
         <form th:action="@{/registration/register}" th:object="${userModel}" method="post">
+            <!-- Input fields for first name, last name, email, phone number, username, and password. -->
             <label for="firstName"></label><input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control form-control-lg"
                                                   th:field="*{firstName}"/>
+            <!-- Error message for first name, displayed in red. -->
             <h5 style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></h5>
+            <!-- Other input fields and error messages follow a similar pattern. -->
             <label for="lastName"></label><input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-control form-control-lg"
                                                  th:field="*{lastName}"/>
             <h5 style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></h5>
@@ -97,13 +108,14 @@
             <label for="password"></label><input type="password" id="password" name="password" placeholder="Password" class="form-control form-control-lg"
                                                  th:field="*{password}" autocomplete="current-password"/>
             <h5 style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></h5>
+            <!-- Submit button for the registration form. -->
             <button class="btn btn-primary" type="submit">Register</button>
+            <!-- Text with a link for users who already have an account. -->
             <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/" class="fw-bold text-body"><u>Login here</u></a></p>
         </form>
     </div>
 </div>
-
-
+<!-- Footer division with a class of footer. -->
 <div layout:fragment="footer" class="footer"></div>
 </body>
 </html>
