@@ -61,12 +61,25 @@ Open your web browser and navigate to [http://localhost:8080](http://localhost:8
 
 ## Screenshots
 
+### Homepage
 ![Homepage Screenshot](documents/screenshots/home_page.png)
+
+### Product Page (Admin View)
 ![Product Page Admin Screenshot](documents/screenshots/products_page_admin.png)
+
+### Product Page (User View)
 ![Product Page User Screenshot](documents/screenshots/products_page_user.png)
+
+### High-Level Architecture
 ![High-Level Architecture Screenshot](documents/screenshots/high_level_architecture.png)
+
+### Logical System Design
 ![Logical System Design Screenshot](documents/screenshots/logical_system_design.png)
+
+### Shopping Cart Logical User Diagram
 ![Shopping Cart Logical User Diagram Screenshot](documents/screenshots/shopping_cart_logical_user_diagram.png)
+
+### Sitemap
 ![Sitemap Screenshot](documents/screenshots/sitemap.png)
 
 ## API Documentation
